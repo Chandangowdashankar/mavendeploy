@@ -16,21 +16,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Cache SonarQube packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: e7bd2edbd451833d38eaf29602d0eb58aaaa5690
-          SONAR_HOST_URL: https://454a-2405-204-519a-90b8-7183-75c6-a97f-71bd.in.ngrok.io
+          SONAR_TOKEN: a2278987b72e94a86526c104a54dc340fdcc2d1f
+          SONAR_HOST_URL: http://52.55.188.136:9000/
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Bhavi
